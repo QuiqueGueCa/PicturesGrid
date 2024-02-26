@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.picturesgrid.R
-import com.example.picturesgrid.data.Picture
+import com.example.picturesgrid.data.domain.models.Picture
 import com.example.picturesgrid.databinding.ItemRecyclerviewImgBinding
 
 class PicturesAdapter(
@@ -35,9 +35,15 @@ class PicturesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //holder.binding.imgPicture.setImageBitmap()
+        holder.binding.imgPicture.setImageURI(pictures[position].uri)
         holder.setListener(position)
     }
 
     override fun getItemCount(): Int = pictures.count()
+
+    fun refreshData(newList: MutableList<Picture>) {
+        pictures.clear()
+        pictures.addAll(newList)
+        notifyDataSetChanged()
+    }
 }
