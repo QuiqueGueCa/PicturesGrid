@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.picturesgrid.R
+import com.example.picturesgrid.data.Picture
 import com.example.picturesgrid.databinding.FragmentGridBinding
+import com.example.picturesgrid.ui.grid_fragment.adapter.PicturesAdapter
 
-class GridFragment : Fragment() {
+class GridFragment : Fragment(), PicturesAdapter.PictureListener {
 
     private lateinit var binding: FragmentGridBinding
+    private lateinit var mAdaper: PicturesAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,7 +29,15 @@ class GridFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupToolBar()
-        
+        setupAdapter()
+
+    }
+
+    private fun setupAdapter() {
+        mAdaper = PicturesAdapter(mutableListOf(), this)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recyclerView.adapter = mAdaper
     }
 
     private fun setupToolBar() {
@@ -34,5 +46,9 @@ class GridFragment : Fragment() {
             Toast.makeText(requireContext(), "asdadsasds", Toast.LENGTH_SHORT).show()
             true
         }
+    }
+
+    override fun onPictureClick(picture: Picture) {
+        // TODO: el cick!
     }
 }

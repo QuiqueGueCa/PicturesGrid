@@ -12,6 +12,7 @@
         tools:context=".ui.main_activity.MainActivity">
 
         <ImageView
+            android:id="@+id/ivPicture"
             android:layout_width="@dimen/imgLargeSize"
             android:layout_height="@dimen/imgLargeSize"
             tools:src="@drawable/ic_launcher_background"
