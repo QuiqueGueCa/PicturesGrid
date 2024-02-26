@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="commonMargin">16dp</dimen>
+    <dimen name="toolBarHeight">50dp</dimen>
+    <dimen name="imgGridSize">100dp</dimen>
+    <dimen name="mediumMargin">8dp</dimen>
+</resources>
