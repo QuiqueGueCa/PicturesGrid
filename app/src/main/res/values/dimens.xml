@@ -4,4 +4,5 @@
     <dimen name="toolBarHeight">50dp</dimen>
     <dimen name="imgGridSize">100dp</dimen>
     <dimen name="mediumMargin">8dp</dimen>
+    <dimen name="imgLargeSize">350dp</dimen>
 </resources>

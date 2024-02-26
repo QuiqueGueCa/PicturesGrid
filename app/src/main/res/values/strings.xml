@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PicturesGrid</string>
+    <string name="menu_add">Añadir</string>
 </resources>

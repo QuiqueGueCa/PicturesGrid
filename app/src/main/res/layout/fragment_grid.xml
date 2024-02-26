@@ -9,14 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".MainActivity">
+        tools:context=".ui.main_activity.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
             android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolBarHeight"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
