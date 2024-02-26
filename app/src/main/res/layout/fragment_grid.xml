@@ -14,6 +14,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
             android:background="@android:color/darker_gray"
+            app:title="Cajón de imágenes"
             android:layout_width="match_parent"
             android:layout_height="@dimen/toolBarHeight"
             app:layout_constraintTop_toTopOf="parent" />
