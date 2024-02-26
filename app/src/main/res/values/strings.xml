@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PicturesGrid</string>
     <string name="menu_add">Añadir</string>
+    <string name="dialog_options_title">Qué quieres hacer?</string>
+    <string name="goToGallery">Ir a la galería</string>
+    <string name="takePicture">Hacer una foto</string>
+
 </resources>
