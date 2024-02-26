@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:src="@color/black"
+        tools:src="@drawable/ic_launcher_background"
         android:importantForAccessibility="no" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
