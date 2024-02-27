@@ -113,6 +113,7 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
         val img = File(requireContext().filesDir, "$idPicture.png")
         println(requireContext().filesDir)
         idPicture++
+
         return FileProvider.getUriForFile(
             requireContext(),
             "com.example.picturesgrid.ui.grid_fragment.FileProvider",
