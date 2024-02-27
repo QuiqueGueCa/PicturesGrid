@@ -8,14 +8,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
+        android:background="@color/cardview_dark_background"
         tools:context=".ui.main_activity.MainActivity">
 
         <ImageView
             android:id="@+id/ivPicture"
-            android:layout_width="@dimen/imgLargeSize"
-            android:layout_height="@dimen/imgLargeSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             tools:src="@drawable/ic_launcher_background"
+            android:layout_margin="@dimen/commonMargin"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

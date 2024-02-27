@@ -111,6 +111,7 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
 
     private fun createImgUri(): Uri {
         val img = File(requireContext().filesDir, "$idPicture.png")
+        println(requireContext().filesDir)
         idPicture++
         return FileProvider.getUriForFile(
             requireContext(),

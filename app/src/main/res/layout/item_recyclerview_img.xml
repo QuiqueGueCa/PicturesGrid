@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/imgGridSize"
     android:layout_height="@dimen/imgGridSize"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="@dimen/mediumMargin">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/imgPicture"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
+        android:layout_margin="@dimen/mediumMargin"
         tools:src="@drawable/ic_launcher_background"
         android:importantForAccessibility="no" />
 
