@@ -1,10 +1,7 @@
 package com.example.picturesgrid.ui.grid_fragment
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.picturesgrid.R
-import com.example.picturesgrid.data.constants.Constants.REQUEST_GALLERY
 import com.example.picturesgrid.data.domain.models.Picture
 import com.example.picturesgrid.databinding.FragmentGridBinding
 import com.example.picturesgrid.ui.grid_fragment.adapter.PicturesAdapter
@@ -30,7 +26,8 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
     private val mViewModel = GridViewModel()
     private lateinit var imgUri: Uri
     private var idPicture = 0
-    private lateinit var mContractCamera: ActivityResultLauncher<Uri?>
+    private lateinit var mContractCamera: ActivityResultLauncher<Uri>
+    private lateinit var mContractGallery: ActivityResultLauncher<String>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,12 +39,10 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setContracts()
         setupAdapter()
         setupViewModel()
         setupToolBar()
-
     }
 
     private fun setContracts() {
@@ -57,6 +52,12 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
                     mViewModel.addPicture(imgUri)
                 }
             }
+
+        mContractGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if (uri != null) {
+                mViewModel.addPicture(uri)
+            }
+        }
     }
 
     private fun setupViewModel() {
@@ -98,17 +99,7 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
     }
 
     private fun showGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_GALLERY)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK && data != null) {
-            val uri = data.data
-            mViewModel.addPicture(uri)
-        }
+        mContractGallery.launch("image/*")
     }
 
     override fun onPictureClick(picture: Picture) {
