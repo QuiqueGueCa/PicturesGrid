@@ -2,11 +2,15 @@ package com.example.picturesgrid.ui.grid_fragment
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,12 +21,16 @@ import com.example.picturesgrid.databinding.FragmentGridBinding
 import com.example.picturesgrid.ui.grid_fragment.adapter.PicturesAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import java.io.File
 
 class GridFragment : Fragment(), PicturesAdapter.PictureListener {
 
     private lateinit var binding: FragmentGridBinding
     private lateinit var mAdapter: PicturesAdapter
     private val mViewModel = GridViewModel()
+    private lateinit var imgUri: Uri
+    private var idPicture = 0
+    private lateinit var mContractCamera: ActivityResultLauncher<Uri?>
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,10 +43,20 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setContracts()
         setupAdapter()
         setupViewModel()
         setupToolBar()
 
+    }
+
+    private fun setContracts() {
+        mContractCamera =
+            registerForActivityResult(ActivityResultContracts.TakePicture()) { userClickSave ->
+                if (userClickSave) {
+                    mViewModel.addPicture(imgUri)
+                }
+            }
     }
 
     private fun setupViewModel() {
@@ -67,11 +85,16 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
                 .setItems(items) { _, which ->
                     when (which) {
                         0 -> showGallery()
-                        1 -> {} // TODO: decírselo al viewModel
+                        1 -> takePicture()
                     }
                 }.show()
             true
         }
+    }
+
+    private fun takePicture() {
+        imgUri = createImgUri()
+        mContractCamera.launch(imgUri)
     }
 
     private fun showGallery() {
@@ -90,5 +113,15 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
 
     override fun onPictureClick(picture: Picture) {
         // TODO: el cick!
+    }
+
+    private fun createImgUri(): Uri {
+        val img = File(requireContext().filesDir, "$idPicture.png")
+        idPicture++
+        return FileProvider.getUriForFile(
+            requireContext(),
+            "com.example.picturesgrid.ui.grid_fragment.FileProvider",
+            img
+        )
     }
 }
