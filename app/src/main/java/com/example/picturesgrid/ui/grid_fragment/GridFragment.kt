@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.picturesgrid.R
 import com.example.picturesgrid.data.domain.models.Picture
@@ -28,6 +29,7 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
     private var idPicture = 0
     private lateinit var mContractCamera: ActivityResultLauncher<Uri>
     private lateinit var mContractGallery: ActivityResultLauncher<String>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -103,7 +105,8 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
     }
 
     override fun onPictureClick(picture: Picture) {
-        // TODO: el cick!
+        findNavController()
+            .navigate(GridFragmentDirections.actionGridFragmentToImgFragment(picture))
     }
 
     private fun createImgUri(): Uri {

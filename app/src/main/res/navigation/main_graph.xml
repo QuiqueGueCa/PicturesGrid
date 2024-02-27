@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/gridFragment"
         android:name="com.example.picturesgrid.ui.grid_fragment.GridFragment"
-        android:label="GridFragment" />
+        android:label="GridFragment">
+        <action
+            android:id="@+id/action_gridFragment_to_imgFragment"
+            app:destination="@id/imgFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imgFragment"
+        android:name="com.example.picturesgrid.ui.img_fragment.ImgFragment"
+        android:label="ImgFragment">
+        <argument
+            android:name="picture"
+            app:argType="com.example.picturesgrid.data.domain.models.Picture" />
+    </fragment>
 </navigation>
