@@ -51,13 +51,13 @@ class GridFragment : Fragment(), PicturesAdapter.PictureListener {
         mContractCamera =
             registerForActivityResult(ActivityResultContracts.TakePicture()) { userClickSave ->
                 if (userClickSave) {
-                    mViewModel.addPicture(imgUri)
+                    mViewModel.addPictureToList(imgUri)
                 }
             }
 
         mContractGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri != null) {
-                mViewModel.addPicture(uri)
+                mViewModel.addPictureToList(uri)
             }
         }
     }

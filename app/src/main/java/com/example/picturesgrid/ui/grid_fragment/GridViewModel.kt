@@ -12,7 +12,7 @@ class GridViewModel : ViewModel() {
     val picturesFlow: StateFlow<MutableList<Picture>> = _picturesFlow
 
     private val pictures = mutableListOf<Picture>()
-    fun addPicture(uri: Uri?) {
+    fun addPictureToList(uri: Uri?) {
         if (uri != null) {
             val picture = Picture(uri)
             pictures.add(picture)
